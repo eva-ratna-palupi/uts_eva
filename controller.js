@@ -39,3 +39,16 @@ exports.tambahsparepart = function(req,res){
             }
         });
 };
+
+//menampilkan semua data montir
+exports.tampilmontir = function(req,res){
+    connection.query('SELECT * FROM t_montir',function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+        
+    });
+};
