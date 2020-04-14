@@ -19,3 +19,23 @@ exports.tampilsparepart = function(req,res){
         
     });
 };
+
+//menambahkan sparepart
+exports.tambahsparepart = function(req,res){
+    var Id_sparepart = req.body.Id_sparepart;
+    var Nama_sparepart = req.body.Nama_sparepart;
+    var harga_sparepart = req.body.harga_sparepart;
+    var harga = req.body.harga;
+
+    connection.query('INSERT INTO t_sparepart (Id_sparepart,Nama_sparepart,harga_sparepart,satuan) VALUES(?,?,?,?)',
+    [Id_sparepart,Nama_sparepart,harga_sparepart,satuan],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil menambahkan data Sparepart",res)
+            }
+        });
+};
