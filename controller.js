@@ -71,3 +71,16 @@ exports.tambahmontir = function(req,res){
             }
         });
 };
+
+//menampilkan semua data servis
+exports.tampilservis = function(req,res){
+    connection.query('SELECT * FROM t_servis',function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+        
+    });
+};
