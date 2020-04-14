@@ -106,3 +106,16 @@ exports.tambahservis = function(req,res){
             }
         });
 };
+
+//menampilkan semua data user
+exports.tampiluser = function(req,res){
+    connection.query('SELECT * FROM t_user',function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+        
+    });
+};
