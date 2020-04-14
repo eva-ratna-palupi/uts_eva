@@ -40,7 +40,7 @@ exports.registrasi = function(req,res) {
                 });
             }
                 else{
-                    response.ok("Email Sudah Terdaftar");
+                    response.ok("Email Sudah Terdaftar",res);
                 }
 
             }
