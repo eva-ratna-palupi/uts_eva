@@ -10,7 +10,7 @@ module.exports= function(app){
         .get(jsonku.tampilsparepart);
     
     app.route('/tambahsparepart')
-        .get(jsonku.tambahsparepart);
+        .post(jsonku.tambahsparepart);
     
     app.route('/tampilmontir')
         .get(jsonku.tampilmontir);
@@ -26,5 +26,11 @@ module.exports= function(app){
     
     app.route('/tampiluser')
         .get(jsonku.tampiluser);
+
+    app.route('/tampillevel')
+        .get(jsonku.tampillevel);
+
+    app.route('/tambahlevel')
+        .post(jsonku.tambahlevel);
 
 };

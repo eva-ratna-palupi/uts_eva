@@ -25,7 +25,7 @@ exports.tambahsparepart = function(req,res){
     var Id_sparepart = req.body.Id_sparepart;
     var Nama_sparepart = req.body.Nama_sparepart;
     var harga_sparepart = req.body.harga_sparepart;
-    var harga = req.body.harga;
+    var satuan = req.body.satuan;
 
     connection.query('INSERT INTO t_sparepart (Id_sparepart,Nama_sparepart,harga_sparepart,satuan) VALUES(?,?,?,?)',
     [Id_sparepart,Nama_sparepart,harga_sparepart,satuan],
@@ -118,4 +118,35 @@ exports.tampiluser = function(req,res){
         }
         
     });
+};
+
+//menampilkan semua data level
+exports.tampillevel = function(req,res){
+    connection.query('SELECT * FROM t_level',function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+        
+    });
+};
+
+//menambahkan level
+exports.tambahlevel = function(req,res){
+    var Id_level = req.body.Id_level;
+    var Nama_level = req.body.Nama_level;
+    
+    connection.query('INSERT INTO t_level (Id_level, Nama_level) VALUES(?,?)',
+    [Id_level,Nama_level],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil menambahkan data Level",res)
+            }
+        });
 };
