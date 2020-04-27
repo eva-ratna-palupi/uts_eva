@@ -50,7 +50,7 @@ exports.registrasi = function(req,res) {
 // controller untuk login
 exports.login = function(req,res){
     var post = {
-        password : req.body.password,
+        password: req.body.password,
         email: req.body.email
     }
 
@@ -67,16 +67,16 @@ exports.login = function(req,res){
                     expiresIn: 1440
                 });
 
-                id=rows[0].id_user; 
+                Id=rows[0].Id_user; 
 
                 var data = {
-                    id: id,
-                    akses_token: token,
+                    Id: Id,
+                    access_token: token,
                     ip_address: ip.address()
                 }
 
                 var query = "INSERT INTO ?? SET ?";
-                var table = ["t_level"];
+                var table = ["akses_token"];
 
                 query = mysql.format(query, table);
                 connection.query(query, data, function(error, rows){
@@ -87,7 +87,7 @@ exports.login = function(req,res){
                             success: true,
                             message:'Token JWT tergenerate!',
                             token:token,
-                            currUser: data.id
+                            currUser: data.Id
                         });
                     }
                 });
