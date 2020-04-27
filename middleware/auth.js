@@ -67,12 +67,12 @@ exports.login = function(req,res){
                     expiresIn: 1440
                 });
 
-                Id: rows[0].Id_user; 
+                id: rows[0].id_user; 
 
                 var data = {
-                    Id: Id,
+                    id: id,
                     akses_token: token,
-                    Ip_address: ip.address()
+                    ip_address: ip.address()
                 }
 
                 var query = "INSERT INTO ?? SET ?";

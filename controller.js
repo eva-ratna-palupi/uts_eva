@@ -7,7 +7,7 @@ exports.index = function(req,res){
     response.ok("Aplikasi REST API ku berjalan yeee..",res)
 };
 
-//menampilakn semua data sparepart
+//menampilkan semua data sparepart
 exports.tampilsparepart = function(req,res){
     connection.query('SELECT * FROM t_sparepart',function(error,rows, fields){
         if(error){
@@ -36,6 +36,42 @@ exports.tambahsparepart = function(req,res){
             }
             else{
                 response.ok("Berhasil menambahkan data Sparepart",res)
+            }
+        });
+};
+
+//mengubah data sparepart
+exports.ubahsparepart = function(req,res){
+    var Id_sparepart = req.body.Id_sparepart;
+    var Nama_sparepart = req.body.Nama_sparepart;
+    var harga_sparepart = req.body.harga_sparepart;
+    var satuan = req.body.satuan;
+
+    connection.query('UPDATE t_sparepart SET Nama_sparepart=?, harga_sparepart=?, satuan =? WHERE Id_sparepart=?',
+    [Nama_sparepart,harga_sparepart,satuan,Id_sparepart],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Ubah Data Sparepart",res)
+            }
+        });
+};
+
+//menghapus data sparepart berdasarkan id
+exports.hapussparepart = function(req,res){
+    var Id_sparepart = req.body.Id_sparepart;
+    connection.query('DELETE FROM t_sparepart WHERE Id_sparepart=?',
+    [Id_sparepart],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Hapus Data Sparepart",res)
             }
         });
 };
