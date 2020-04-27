@@ -67,7 +67,7 @@ exports.login = function(req,res){
                     expiresIn: 1440
                 });
 
-                id: rows[0].id_user; 
+                id=rows[0].id_user; 
 
                 var data = {
                     id: id,
@@ -87,7 +87,7 @@ exports.login = function(req,res){
                             success: true,
                             message:'Token JWT tergenerate!',
                             token:token,
-                            currUser: data.Id
+                            currUser: data.id
                         });
                     }
                 });
@@ -97,4 +97,8 @@ exports.login = function(req,res){
             }
         }
     });
+}
+
+exports.halamanrahasia = function(req,res){
+    response.ok("Halaman ini hanya untuk user dengan level = ADMIN!",res);
 }
