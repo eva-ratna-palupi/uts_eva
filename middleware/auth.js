@@ -84,6 +84,7 @@ exports.login = function(req,res){
                         console.log(error);
                     }else {
                         res.json({
+                            auth: true,
                             success: true,
                             message:'Token JWT tergenerate!',
                             token:token,
@@ -100,5 +101,5 @@ exports.login = function(req,res){
 }
 
 exports.halamanrahasia = function(req,res){
-    response.ok("Halaman ini hanya untuk user dengan level = ADMIN!",res);
+    response.ok("Halaman ini hanya untuk user dengan level = ADMIN!", res);
 }
