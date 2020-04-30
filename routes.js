@@ -8,6 +8,9 @@ module.exports= function(app){
 
     app.route('/tampilsparepart')
         .get(jsonku.tampilsparepart);
+
+    app.route('/tampilsparepart/:id')
+        .get(jsonku.tampilidspare);
     
     app.route('/tambahsparepart')
         .post(jsonku.tambahsparepart);
@@ -26,15 +29,21 @@ module.exports= function(app){
     app.route('/tambahmontir')
         .post(jsonku.tambahmontir);
 
+
+
     app.route('/tampilservis')
         .get(jsonku.tampilservis);
     
     app.route('/tambahservis')
         .post(jsonku.tambahservis);
     
+
+
     app.route('/tampiluser')
         .get(jsonku.tampiluser);
 
+
+        
     app.route('/tampillevel')
         .get(jsonku.tampillevel);
 

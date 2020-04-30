@@ -40,6 +40,20 @@ exports.tambahsparepart = function(req,res){
         });
 };
 
+//menampilkan semua data sparepart berdasarkan id
+exports.tampilidspare = function(req,res){
+    let id = req.params.id;
+    connection.query('SELECT * FROM t_sparepart WHERE id_sparepart = ?', [id],
+    function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+    });
+};
+
 //mengubah data sparepart
 exports.ubahsparepart = function(req,res){
     var Id_sparepart = req.body.Id_sparepart;
