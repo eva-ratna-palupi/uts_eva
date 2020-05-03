@@ -25,12 +25,22 @@ module.exports= function(app){
         
     app.route('/tampilmontir')
         .get(jsonku.tampilmontir);
+
+    app.route('/tampilmontir/:id')
+        .get(jsonku.tampilidmontir);
     
     app.route('/tambahmontir')
         .post(jsonku.tambahmontir);
+    
+    app.route('/ubahmontir')
+        .put(jsonku.ubahmontir);
+
+    app.route('/hapusmontir')
+        .delete(jsonku.hapusmontir);
 
 
 
+        
     app.route('/tampilservis')
         .get(jsonku.tampilservis);
     

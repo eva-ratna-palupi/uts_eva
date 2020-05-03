@@ -90,6 +90,8 @@ exports.hapussparepart = function(req,res){
         });
 };
 
+
+
 //menampilkan semua data montir
 exports.tampilmontir = function(req,res){
     connection.query('SELECT * FROM t_montir',function(error,rows, fields){
@@ -100,6 +102,20 @@ exports.tampilmontir = function(req,res){
             response.ok(rows,res)
         }
         
+    });
+};
+
+//menampilkan semua data montir berdasarkan id
+exports.tampilidmontir = function(req,res){
+    let id = req.params.id;
+    connection.query('SELECT * FROM t_montir WHERE id_montir = ?', [id],
+    function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
     });
 };
 
@@ -121,6 +137,43 @@ exports.tambahmontir = function(req,res){
             }
         });
 };
+
+//mengubah data montir
+exports.ubahmontir = function(req,res){
+    var Id_montir = req.body.Id_montir;
+    var Nama_montir = req.body.Nama_montir;
+    var harga_perjam = req.body.harga_perjam;
+    
+    connection.query('UPDATE t_montir SET Nama_montir=?, harga_perjam=? WHERE Id_montir=?',
+    [Nama_montir, harga_perjam, Id_montir],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Ubah Data Montir",res)
+            }
+        });
+};
+
+//menghapus data montir berdasarkan id
+exports.hapusmontir = function(req,res){
+    var Id_montir = req.body.Id_montir;
+    connection.query('DELETE FROM t_montir WHERE Id_montir=?',
+    [Id_montir],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Hapus Data Montir",res)
+            }
+        });
+};
+
+
 
 //menampilkan semua data servis
 exports.tampilservis = function(req,res){
