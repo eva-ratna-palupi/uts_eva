@@ -2,6 +2,7 @@
 
 var response = require('./res');
 var connection = require('./koneksi');
+var md5 = require('MD5');
 
 exports.index = function(req,res){
     response.ok("Aplikasi REST API ku berjalan yeee..",res)
@@ -177,7 +178,7 @@ exports.hapusmontir = function(req,res){
 
 //menampilkan semua data servis
 exports.tampilservis = function(req,res){
-    connection.query('SELECT * FROM t_servis',function(error,rows, fields){
+    connection.query('SELECT * FROM total_servis',function(error,rows, fields){
         if(error){
             console.log(error);
         }
@@ -187,6 +188,7 @@ exports.tampilservis = function(req,res){
         
     });
 };
+
 
 //menambahkan servis
 exports.tambahservis = function(req,res){
@@ -210,6 +212,46 @@ exports.tambahservis = function(req,res){
         });
 };
 
+//mengubah data servis
+exports.ubahservis = function(req,res){
+    var Id_servis = req.body.Id_servis;
+    var tgl_servis = new Date();
+    var Id_user = req.body.Id_user;
+    var Id_montir = req.body.Id_montir;
+    var Jumlah_sparepart = req.body.Jumlah_sparepart;
+    var Id_sparepart = req.body.Id_sparepart;
+    
+    connection.query('UPDATE t_servis SET tgl_servis=?, Id_user=?, Id_montir=?, Jumlah_sparepart=?, Id_sparepart=? WHERE Id_servis=?',
+    [tgl_servis, Id_user, Id_montir, Jumlah_sparepart, Id_sparepart, Id_servis],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Ubah Data Servis",res)
+            }
+        });
+};
+
+//menghapus data servis berdasarkan id
+exports.hapusservis = function(req,res){
+    var Id_servis = req.body.Id_servis;
+    connection.query('DELETE FROM t_servis WHERE Id_servis=?',
+    [Id_servis],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Hapus Data Servis",res)
+            }
+        });
+};
+
+
+
 //menampilkan semua data user
 exports.tampiluser = function(req,res){
     connection.query('SELECT * FROM t_user',function(error,rows, fields){
@@ -222,6 +264,59 @@ exports.tampiluser = function(req,res){
         
     });
 };
+
+//menampilkan semua data user berdasarkan id
+exports.tampiliduser = function(req,res){
+    let id = req.params.id;
+    connection.query('SELECT * FROM t_user WHERE Id_user = ?', [id],
+    function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+    });
+};
+
+//mengubah data user
+exports.ubahuser = function(req,res){
+    
+    var Id_user= req.body.Id_user;
+    var Nama_user= req.body.Nama_user;
+    var email= req.body.email;
+    var password= md5(req.body.password);
+    var level= req.body.level;
+        
+    connection.query('UPDATE t_user SET Nama_user=?, email=?, password=?, level=? WHERE Id_user=?',
+    [Nama_user, email, password, level, Id_user],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Ubah Data User",res)
+            }
+        });
+};
+
+//menghapus data user berdasarkan id
+exports.hapususer = function(req,res){
+    var Id_user = req.body.Id_user;
+    connection.query('DELETE FROM t_user WHERE Id_user=?',
+    [Id_user],
+    function (error,rows,fields)
+    {
+            if(error){
+                console.log(error);
+            }
+            else{
+                response.ok("Berhasil Hapus Data User",res)
+            }
+        });
+};
+
 
 //menampilkan semua data level
 exports.tampillevel = function(req,res){
@@ -236,7 +331,21 @@ exports.tampillevel = function(req,res){
     });
 };
 
-//menambahkan level
+//menampilkan semua data level berdasarkan id
+exports.tampilidlevel = function(req,res){
+    let id = req.params.id;
+    connection.query('SELECT * FROM t_level WHERE Id_level = ?', [id],
+    function(error,rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            response.ok(rows,res)
+        }
+    });
+};
+
+//menambahkan data level
 exports.tambahlevel = function(req,res){
     var Id_level = req.body.Id_level;
     var Nama_level = req.body.Nama_level;
@@ -253,3 +362,32 @@ exports.tambahlevel = function(req,res){
             }
         });
 };
+
+//mengubah data Level
+exports.ubahlevel = function (req, res) {
+    var Id_level = req.body.Id_level;
+    var Nama_level = req.body.Nama_level;
+
+    connection.query('UPDATE t_level SET Nama_level=?  WHERE Id_level=?',
+     [Nama_level, Id_level],
+    function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Mengubah Data Level", res)
+            }
+        });
+};
+
+exports.hapuslevel = function(req, res){
+    var id = req.body.Id_level;
+    connection.query('DELETE FROM t_level WHERE Id_level=?', [id],
+    function (error, rows, fields) {
+        if (error) {
+            console.log(error);
+        } else {
+            response.ok("Berhasil Hapus Data Level", res)
+        }
+    });
+};
+

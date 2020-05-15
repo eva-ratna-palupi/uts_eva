@@ -16,7 +16,7 @@ module.exports= function(app){
         .post(jsonku.tambahsparepart);
 
     app.route('/ubahsparepart')
-        .put(jsonku.ubahsparepart)
+        .put(jsonku.ubahsparepart);
 
     app.route('/hapussparepart')
         .delete(jsonku.hapussparepart);
@@ -43,21 +43,45 @@ module.exports= function(app){
         
     app.route('/tampilservis')
         .get(jsonku.tampilservis);
-    
+        
     app.route('/tambahservis')
-        .post(jsonku.tambahservis);
+        .post(jsonku.tambahservis); 
+
+    app.route('/ubahservis')
+        .put(jsonku.ubahservis);
+
+    app.route('/hapusservis')
+        .delete(jsonku.hapusservis);
     
 
 
     app.route('/tampiluser')
         .get(jsonku.tampiluser);
 
+    app.route('/tampiluser/:id')
+        .get(jsonku.tampiliduser);
+    
+    app.route('/ubahuser')
+        .put(jsonku.ubahuser);
+    
+    app.route('/hapususer')
+        .delete(jsonku.hapususer);
+
 
         
     app.route('/tampillevel')
         .get(jsonku.tampillevel);
 
+    app.route('/tampillevel/:id')
+        .get(jsonku.tampilidlevel);
+
     app.route('/tambahlevel')
         .post(jsonku.tambahlevel);
+
+    app.route('/ubahlevel')
+        .put(jsonku.ubahlevel);
+
+    app.route('/hapuslevel')
+        .delete(jsonku.hapuslevel);
 
 };

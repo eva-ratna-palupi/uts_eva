@@ -64,7 +64,7 @@ exports.login = function(req,res){
         }else {
             if(rows.length == 1){
                 var token = jwt.sign({rows}, config.secret,{
-                    expiresIn: 1440
+                    expiresIn: '3h'
                 });
                 
                 id_user = rows[0].id_user;
@@ -101,4 +101,8 @@ exports.login = function(req,res){
 
 exports.halamanrahasia = function(req,res){
     response.ok("Halaman ini hanya untuk user dengan level = ADMIN!", res);
+}
+
+exports.halamanrahasia2 = function(req,res){
+    response.ok("Halaman ini hanya untuk user dengan level = PELANGGAN!", res);
 }
